@@ -55,7 +55,7 @@ INCLUDE(CMakeParseArguments)
 #    CODE_SIGN_IDENTITY "iPhone Developer"
 #    TEAM_ID "AAAAAAAA"
 #    COPYRIGHT "My Cool Copyright"
-#    QML_DIR "${QT_WINDOWS_QT_ROOT}/qml"
+#    QML_DIR "${QT_IOS_QT_ROOT}/qml"
 #    ASSET_DIR "path/to/Assets.xcassets"
 #    MAIN_STORYBOARD "/path/to/Main.storyboard"
 #        LAUNCHSCREEN_STORYBOARD "path/to/LaunchScreen.storyboard"

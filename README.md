@@ -27,7 +27,7 @@ The Application [QQuickMaterialHelperGallery](https://github.com/OlivierLDff/QQu
 All you have to do is to call the ```add_qt_ios_app``` macro. No additionnal target will be generated, only the main target property are going to change. Of course this is not enough and you'll need to add extract arguments.
 
 ```cmake
-IF(${CMAKE_SYSTEM_NAME} STREQUAL "iOS")	
+IF(${CMAKE_SYSTEM_NAME} STREQUAL "iOS") 
     INCLUDE(QtIosCMake/AddQtIosApp.cmake)
     add_qt_ios_app(MyApp)
 ENDIF()
@@ -96,12 +96,12 @@ add_qt_ios_app(MyApp
     CODE_SIGN_IDENTITY "iPhone Developer"
     TEAM_ID "AAAAAAAA"
     COPYRIGHT "My Cool Copyright"
-    QML_DIR "${QT_WINDOWS_QT_ROOT}/qml"
+    QML_DIR "${QT_IOS_QT_ROOT}/qml"
     ASSET_DIR "path/to/Assets.xcassets"
     MAIN_STORYBOARD "/path/to/Main.storyboard"
-		LAUNCHSCREEN_STORYBOARD "path/to/LaunchScreen.storyboard"
-		CATALOG_APPICON "AppIcon"
-		CATALOG_LAUNCHIMAGE "LaunchImage"
+    LAUNCHSCREEN_STORYBOARD "path/to/LaunchScreen.storyboard"
+    CATALOG_APPICON "AppIcon"
+    CATALOG_LAUNCHIMAGE "LaunchImage"
     ORIENTATION_PORTRAIT
     ORIENTATION_PORTRAIT_UPSIDEDOWN
     ORIENTATION_LANDSCAPELEFT
