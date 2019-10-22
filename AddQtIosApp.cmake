@@ -13,6 +13,7 @@ IF(NOT Qt5Core_DIR)
 ENDIF(NOT Qt5Core_DIR)
 GET_FILENAME_COMPONENT(QT_IOS_QT_ROOT "${Qt5Core_DIR}/../../.." ABSOLUTE)
 
+set(QT_IOS_QT_ROOT ${QT_IOS_QT_ROOT} CACHE STRING "Root of qt sdk for ios" FORCE)
 IF(QT_IOS_QT_ROOT)
     MESSAGE(STATUS "Found Qt Sdk for Ios: ${QT_IOS_QT_ROOT}")
 ELSE(QT_IOS_QT_ROOT)
@@ -20,7 +21,7 @@ ELSE(QT_IOS_QT_ROOT)
 ENDIF(QT_IOS_QT_ROOT)
 
 # Keep track of our own directory for future use (and default value of plist.in)
-SET(QT_IOS_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR})
+SET(QT_IOS_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE STRING "Root AddQtIosApp.cmake script" FORCE)
 
 # Indicate that the script have been called a least once
 SET(QT_IOS_CMAKE_FOUND ON CACHE BOOL "QtIosCMake have been found." FORCE)
@@ -83,7 +84,7 @@ MACRO(add_qt_ios_app TARGET)
         REQUIRES_FULL_SCREEN
         HIDDEN_STATUS_BAR
         )
-    SET(QT_IOS_ONE_VALUE_ARG NAME 
+    SET(QT_IOS_ONE_VALUE_ARG NAME
         BUNDLE_IDENTIFIER
         VERSION
         SHORT_VERSION
@@ -99,7 +100,7 @@ MACRO(add_qt_ios_app TARGET)
         CATALOG_APPICON
         CATALOG_LAUNCHIMAGE
         )
-    SET(QT_IOS_MULTI_VALUE_ARG ) 
+    SET(QT_IOS_MULTI_VALUE_ARG )
      # parse the macro arguments
     CMAKE_PARSE_ARGUMENTS(ARGIOS "${QT_IOS_OPTIONS}" "${QT_IOS_ONE_VALUE_ARG}" "${QT_IOS_MULTI_VALUE_ARG}" ${ARGN})
 
@@ -210,7 +211,7 @@ MACRO(add_qt_ios_app TARGET)
         IF(QT_IOS_VERBOSE)
         MESSAGE(STATUS "CATALOG_LAUNCHIMAGE not specified, default to ${QT_IOS_CATALOG_LAUNCHIMAGE}.")
         ENDIF(QT_IOS_VERBOSE)
-    ENDIF(NOT QT_IOS_CATALOG_LAUNCHIMAGE)    
+    ENDIF(NOT QT_IOS_CATALOG_LAUNCHIMAGE)
 
     # Print macro configuration
     IF(QT_IOS_VERBOSE)
