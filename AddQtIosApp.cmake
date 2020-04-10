@@ -257,7 +257,7 @@ macro(add_qt_ios_app TARGET)
             endforeach()
         set(${_path_group} ${_path_group_cleaned} PARENT_SCOPE)
         endforeach()
-    endfunction()()
+    endfunction()
 
     macro(qt_ios_handle_cyclical_linking LIBS)
         if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX OR (CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND NOT APPLE))
