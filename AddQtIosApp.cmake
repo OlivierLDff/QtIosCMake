@@ -128,17 +128,32 @@ macro(add_qt_ios_app TARGET)
 
     set(QT_IOS_VERBOSE ${ARGIOS_VERBOSE})
 
+    if(NOT ARGIOS_NAME)
+        if(QT_IOS_VERBOSE)
+            message(STATUS "NAME not provided when calling add_qt_ios_app. Name will be default to ${QT_IOS_TARGET}")
+        endif()
+        set(QT_IOS_NAME ${QT_IOS_TARGET})
+    endif()
+
     # Warning if no default BUNDLE_IDENTIFIER is set
     if(NOT ARGIOS_BUNDLE_IDENTIFIER)
         if(QT_IOS_VERBOSE)
-            message(WARNING "BUNDLE_IDENTIFIER not set when calling add_qt_ios_app. You will need to fix this by hand in XCode")
+            message(STATUS "BUNDLE_IDENTIFIER not set when calling add_qt_ios_app. "
+                "You can fix this by hand in XCode. "
+                "The BUNDLE_IDENTIFIER is defaulted to ${CMAKE_PROJECT_NAME}")
         endif() # QT_IOS_VERBOSE
+        set(QT_IOS_BUNDLE_IDENTIFIER ${CMAKE_PROJECT_NAME}.${QT_IOS_TARGET})
     endif() # NOT ARGIOS_BUNDLE_IDENTIFIER
 
     # Warning if no version
     if(NOT ARGIOS_VERSION)
+        set(QT_IOS_VERSION ${CMAKE_PROJECT_VERSION})
+        if(QT_IOS_VERSION STREQUAL "")
+            set(QT_IOS_VERSION "1.0.0")
+        endif()
         if(QT_IOS_VERBOSE)
-            message(WARNING "VERSION not set when calling add_qt_ios_app. This might result in warning in XCode")
+            message(STATUS "VERSION not set when calling add_qt_ios_app. "
+                "Default VERSION to ${QT_IOS_VERSION}")
         endif() # QT_IOS_VERBOSE
     endif() # NOT ARGIOS_VERSION
 

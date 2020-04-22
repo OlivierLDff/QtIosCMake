@@ -136,6 +136,8 @@ The application bundle identifier. A bundle identifier lets iOS and macOS recogn
 
 Bundle identifiers are usually (not always) written out in reverse DNS notation (`com.myCompany.myApp`).
 
+If not specified, the default value is `${CMAKE_PROJECT_NAME}.${TARGET}`.
+
 *Example:*
 
 ```cmake
@@ -148,7 +150,7 @@ add_qt_ios_app(MyApp
 
 **VERSION**
 
-The string that specifies the build version number of the bundle. This value is a monotonically increased string, comprised of one or more period-separated integers. This value can correspond to either released or unreleased versions of the application. This value cannot be localized. The default is `1.0.0`.
+The string that specifies the build version number of the bundle. This value is a monotonically increased string, comprised of one or more period-separated integers. This value can correspond to either released or unreleased versions of the application. This value cannot be localized. The default is `${CMAKE_PROJECT_VERSION}` is set, otherwise  `1.0.0`.
 
 *Example:*
 
