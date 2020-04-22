@@ -341,7 +341,7 @@ macro(add_qt_ios_app TARGET)
     if(QT_IOS_VERBOSE)
         message(STATUS "Add -e _qt_main_wrapper linker flag to ${QT_IOS_TARGET} to change application entry point to create UIApplication before QApplication")
     endif() # QT_IOS_VERBOSE
-    target_link_libraries(${QT_IOS_TARGET} ${QT_LIBRARIES} "-e _qt_main_wrapper")
+    target_link_libraries(${QT_IOS_TARGET} PUBLIC ${QT_LIBRARIES} "-e _qt_main_wrapper")
 
     # Set XCode property for automatic code sign
     qt_ios_set_xcode_property(${QT_IOS_TARGET} CODE_SIGN_IDENTITY ${QT_IOS_CODE_SIGN_IDENTITY} "All")
@@ -460,4 +460,4 @@ macro(add_qt_ios_app TARGET)
         set(MACOSX_BUNDLE_MAIN_STORYBOARD ${CMAKE_MATCH_1})
     endif(QT_IOS_MAIN_STORYBOARD)
 
-endmacro() # add_qt_ios_app TARGET
+endmacro()
