@@ -13,7 +13,6 @@ if(NOT Qt5Core_DIR)
 endif(NOT Qt5Core_DIR)
 get_filename_component(QT_IOS_QT_ROOT "${Qt5Core_DIR}/../../.." ABSOLUTE)
 
-set(QT_IOS_QT_ROOT ${QT_IOS_QT_ROOT} CACHE STRING "Root of qt sdk for ios" FORCE)
 if(QT_IOS_QT_ROOT)
     message(STATUS "Found Qt Sdk for Ios: ${QT_IOS_QT_ROOT}")
 else(QT_IOS_QT_ROOT)
@@ -21,13 +20,7 @@ else(QT_IOS_QT_ROOT)
 endif(QT_IOS_QT_ROOT)
 
 # Keep track of our own directory for future use (and default value of plist.in)
-set(QT_IOS_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR} CACHE STRING "Root AddQtIosApp.cmake script" FORCE)
-
-# Indicate that the script have been called a least once
-set(QT_IOS_CMAKE_FOUND ON CACHE BOOL "QtIosCMake have been found." FORCE)
-set(QT_IOS_CMAKE_VERSION "1.0.0" CACHE STRING "QtIosCMake Version" FORCE)
-
-message(STATUS "QtIosCMake version ${QT_IOS_CMAKE_VERSION}")
+set(QT_IOS_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR})
 
 # This little macro lets you set any Xcode specific property.
 # This is from iOs CMake Toolchain
