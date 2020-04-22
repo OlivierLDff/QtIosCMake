@@ -10,14 +10,14 @@ cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 # Dependant on Qt5
 if(NOT Qt5Core_DIR)
     find_package(Qt5Core REQUIRED)
-endif(NOT Qt5Core_DIR)
+endif()
 get_filename_component(QT_IOS_QT_ROOT "${Qt5Core_DIR}/../../.." ABSOLUTE)
 
 if(QT_IOS_QT_ROOT)
     message(STATUS "Found Qt Sdk for Ios: ${QT_IOS_QT_ROOT}")
-else(QT_IOS_QT_ROOT)
+else()
     message(FATAL_ERROR "Fail to find Qt Sdk path.")
-endif(QT_IOS_QT_ROOT)
+endif()
 
 # Keep track of our own directory for future use (and default value of plist.in)
 set(QT_IOS_SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR})
