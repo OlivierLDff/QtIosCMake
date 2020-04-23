@@ -352,15 +352,15 @@ The default allowed orientation can be set with flags:
 
 You can specify supported device either iPhone or iPad or both by settings:
 
-* `SUPPORT_IPHONE`: Set by default
+* `SUPPORT_IPHONE`: Support iPhone.
 
 ![ScDeviceiPhone](doc/ScDeviceiPhone.png)
 
-* `SUPPORT_IPAD`: If set and you want to keep iPhone you also need to specify SUPPORT_IPHONE
+* `SUPPORT_IPAD`: Support iPad.
 
 ![ScDeviceiPad](doc/ScDeviceiPad.png)
 
-When the two flags are specified deployment will result in Universal.
+When the two flags are specified deployment will result in Universal. This is also the default behavior.
 
 ![ScDevices](doc/ScDevices.png)
 
