@@ -189,22 +189,6 @@ macro(add_qt_ios_app TARGET)
         endif() # QT_IOS_VERBOSE
     endif() # NOT QT_IOS_QML_DIR
 
-    # Warning, somework will be required in XCode
-    if(NOT QT_IOS_CODE_SIGN_IDENTITY)
-        set(QT_IOS_CODE_SIGN_IDENTITY "iPhone Developer")
-        if(QT_IOS_VERBOSE)
-            message(WARNING "CODE_SIGN_IDENTITY not specified, default to ${QT_IOS_CODE_SIGN_IDENTITY}. You might need to set it in XCode")
-        endif() # QT_IOS_VERBOSE
-    endif() # NOT QT_IOS_CODE_SIGN_IDENTITY
-
-    # Warning, somework will be required in XCode
-    if(NOT QT_IOS_TEAM_ID)
-        set(QT_IOS_TEAM_ID "AAAAAAAA")
-        if(QT_IOS_VERBOSE)
-            message(WARNING "TEAM_ID not specified, default to ${QT_IOS_TEAM_ID}. You might need to set it in XCode")
-        endif() # QT_IOS_VERBOSE
-    endif() # NOT QT_IOS_TEAM_ID
-
     if(NOT QT_IOS_CATALOG_APPICON)
         set(QT_IOS_CATALOG_APPICON "AppIcon")
         if(QT_IOS_VERBOSE)
@@ -359,8 +343,15 @@ macro(add_qt_ios_app TARGET)
     target_link_libraries(${QT_IOS_TARGET} PUBLIC ${QT_LIBRARIES} "-e _qt_main_wrapper")
 
     # Set XCode property for automatic code sign
-    qt_ios_set_xcode_property(${QT_IOS_TARGET} CODE_SIGN_IDENTITY ${QT_IOS_CODE_SIGN_IDENTITY} "All")
-    qt_ios_set_xcode_property(${QT_IOS_TARGET} DEVELOPMENT_TEAM ${QT_IOS_TEAM_ID} "All")
+    if(QT_IOS_CODE_SIGN_IDENTITY)
+        qt_ios_set_xcode_property(${QT_IOS_TARGET} CODE_SIGN_IDENTITY ${QT_IOS_CODE_SIGN_IDENTITY} "All")
+    endif()
+    if(QT_IOS_TEAM_ID)
+        qt_ios_set_xcode_property(${QT_IOS_TARGET} DEVELOPMENT_TEAM ${QT_IOS_TEAM_ID} "All")
+    endif()
+    if(QT_IOS_PROVISIONING_PROFILE_SPECIFIER)
+        qt_ios_set_xcode_property(${QT_IOS_TARGET} PROVISIONING_PROFILE_SPECIFIER ${QT_IOS_PROVISIONING_PROFILE_SPECIFIER} "All")
+    endif()
 
     # Ugly but working
     if(QT_IOS_SUPPORT_IPAD AND QT_IOS_SUPPORT_IPHONE)
