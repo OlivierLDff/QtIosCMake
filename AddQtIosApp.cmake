@@ -372,6 +372,10 @@ macro(add_qt_ios_app TARGET)
     # Set LaunchImage Catalog
     qt_ios_set_xcode_property (${QT_IOS_TARGET} ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME ${QT_IOS_CATALOG_LAUNCHIMAGE} "All")
 
+    # Make sure a publish dialog is set in XCode.
+    # If INSTALL_PATH is empty it won't be possible to deploy to App Store
+    qt_ios_set_xcode_property(${QT_IOS_TARGET} INSTALL_PATH "/Applications" "All")
+
     # Set CMake variables for plist
     set(MACOSX_BUNDLE_EXECUTABLE_NAME ${QT_IOS_NAME})
     set(MACOSX_BUNDLE_INFO_STRING ${QT_IOS_NAME})
