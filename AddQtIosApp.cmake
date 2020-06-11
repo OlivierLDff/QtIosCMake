@@ -460,7 +460,7 @@ macro(add_qt_ios_app TARGET)
     if(QT_IOS_LAUNCHSCREEN_STORYBOARD)
         target_sources(${QT_IOS_TARGET} PRIVATE ${QT_IOS_LAUNCHSCREEN_STORYBOARD})
         set_source_files_properties(${QT_IOS_LAUNCHSCREEN_STORYBOARD} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
-        string(REGEX MATCH "[a-zA-Z0-9 \\-_]*\\.storyboard" STORYBOARD_FILE_NAME ${QT_IOS_LAUNCHSCREEN_STORYBOARD})
+        get_filename_component(STORYBOARD_FILE_NAME ${QT_IOS_LAUNCHSCREEN_STORYBOARD} NAME_WE)
         if(QT_IOS_VERBOSE)
             message(STATUS "Add UILaunchStoryboardName key with value ${STORYBOARD_FILE_NAME} in Info.pList")
         endif() # QT_IOS_VERBOSE
