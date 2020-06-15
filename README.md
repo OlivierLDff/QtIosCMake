@@ -78,6 +78,15 @@ cmake --build . --config Release
   * If you use prebuild qt ios library, then bitcode is disabled.
   * Library is build with minimum Os support 11.0. You need to do the same.
 *  You can also specify `QT_IOS_CODE_SIGN_IDENTITY` and `QT_IOS_TEAM_ID` when running CMake because these variables are rarely inside the `CMakeLists.txt`.
+* **Qt 5.x**:
+  * If x < 15, you may need add
+  ```
+ set(QT_EXTRA_LIBS "-framework Foundation -framework AVFoundation -framework SystemConfiguration -framework AssetsLibrary -framework OpenGLES \
+        -framework CoreText -framework QuartzCore -framework CoreGraphics -framework ImageIO -framework Security -framework UIKit -framework WebKit \
+        -framework CoreBluetooth -framework MobileCoreServices -framework QuickLook -framework AudioToolbox -framework CoreLocation \
+        -framework Accelerate -framework CoreMedia -framework CoreVideo -framework MediaToolbox -framework MediaPlayer -framework GameController -framework CoreMotion -framework StoreKit -weak_framework Metal -lz")
+  ```
+  before call of `add_qt_ios_app` macro.
 
 ## Options of the ```add_qt_ios_app``` macro
 
