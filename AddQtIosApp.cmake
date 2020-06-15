@@ -323,14 +323,6 @@ macro(add_qt_ios_app TARGET)
         endif()
     endforeach()
 
-    # Set almost every framework as extra library, may require some clean in the future.
-    set(QT_EXTRA_LIBS ${QT_EXTRA_LIBS}
-        "-framework Foundation -framework AVFoundation -framework SystemConfiguration -framework AssetsLibrary -framework OpenGLES \
-        -framework CoreText -framework QuartzCore -framework CoreGraphics -framework ImageIO -framework Security -framework UIKit -framework WebKit \
-        -framework CoreBluetooth -framework MobileCoreServices -framework QuickLook -framework AudioToolbox -framework CoreLocation \
-        -framework Accelerate -framework CoreMedia -framework CoreVideo -framework MediaToolbox -framework MediaPlayer -framework GameController -framework CoreMotion -framework StoreKit -weak_framework Metal -lz"
-        )
-
     # static linking
     set(QT_LIBRARIES ${QT_LIBRARIES} ${QT_EXTRA_LIBS})
     qt_ios_handle_cyclical_linking(QT_LIBRARIES)

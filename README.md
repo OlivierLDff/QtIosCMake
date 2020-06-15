@@ -10,7 +10,7 @@ This project provide a CMake macro to help you deploy Qt Application for iOS. Th
 * Generate `Info.plist` with inputs
 * Sign the **XCode** Generated project
 
-The main goal is to build the app without any change inside XCode. 
+The main goal is to build the app without any change inside XCode.
 
 This utility has been developed for my own needs. Don't hesitate to use / share / fork / modify / improve it freely :)
 
@@ -27,7 +27,7 @@ The Application [QQuickMaterialHelperGallery](https://github.com/OlivierLDff/QQu
 All you have to do is to call the ```add_qt_ios_app``` macro. No additionnal target will be generated, only the main target property are going to change. Of course this is not enough and you'll need to add extract arguments.
 
 ```cmake
-IF(${CMAKE_SYSTEM_NAME} STREQUAL "iOS") 
+IF(${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
     INCLUDE(QtIosCMake/AddQtIosApp.cmake)
     add_qt_ios_app(MyApp)
 ENDIF()
@@ -78,6 +78,15 @@ cmake --build . --config Release
   * If you use prebuild qt ios library, then bitcode is disabled.
   * Library is build with minimum Os support 11.0. You need to do the same.
 *  You can also specify `QT_IOS_CODE_SIGN_IDENTITY` and `QT_IOS_TEAM_ID` when running CMake because these variables are rarely inside the `CMakeLists.txt`.
+* **Qt < 5.15**: You may need to add ios library by yourself. With newer version of Qt, the required flags are added in Qt's CMake scripts.
+
+``` cmake
+target_link_libraries(MyApp PUBLIC "-framework Foundation -framework AVFoundation -framework SystemConfiguration -framework AssetsLibrary -framework OpenGLES \
+    -framework CoreText -framework QuartzCore -framework CoreGraphics -framework ImageIO -framework Security -framework UIKit -framework WebKit \
+    -framework CoreBluetooth -framework MobileCoreServices -framework QuickLook -framework AudioToolbox -framework CoreLocation \
+    -framework Accelerate -framework CoreMedia -framework CoreVideo -framework MediaToolbox -framework MediaPlayer -framework GameController
+    -framework CoreMotion -framework StoreKit -weak_framework Metal -lz")
+```
 
 ## Options of the ```add_qt_ios_app``` macro
 
@@ -132,7 +141,7 @@ add_qt_ios_app(MyApp
 
 **BUNDLE_IDENTIFIER**
 
-The application bundle identifier. A bundle identifier lets iOS and macOS recognize any updates to your app. Your bundle ID must be registered with Apple and be unique to your app. Bundle IDs are app-type specific (either iOS or macOS). The same bundle ID cannot be used for both iOS and macOS apps. 
+The application bundle identifier. A bundle identifier lets iOS and macOS recognize any updates to your app. Your bundle ID must be registered with Apple and be unique to your app. Bundle IDs are app-type specific (either iOS or macOS). The same bundle ID cannot be used for both iOS and macOS apps.
 
 Bundle identifiers are usually (not always) written out in reverse DNS notation (`com.myCompany.myApp`).
 
