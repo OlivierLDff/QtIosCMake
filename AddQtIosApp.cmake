@@ -430,7 +430,7 @@ macro(add_qt_ios_app TARGET)
        NOT QT_IOS_ORIENTATION_LANDSCAPE_RIGHT)
         set(MACOSX_BUNDLE_PORTRAIT "UIInterfaceOrientationPortrait")
         if(QT_IOS_VERBOSE)
-            message(STATUS "Add UIInterfaceOrientationPortrait as default to Info.pList becase nothing was set by user in the list"
+            message(STATUS "Add UIInterfaceOrientationPortrait as default to Info.pList becayse nothing was set by user in the list"
             "{ORIENTATION_PORTRAIT, ORIENTATION_PORTRAIT_UPDOWN, ORIENTATION_LANDSCAPE_LEFT, ORIENTATION_LANDSCAPE_RIGHT}")
         endif() # QT_IOS_VERBOSE
     endif()
