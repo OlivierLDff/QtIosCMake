@@ -196,12 +196,12 @@ macro(add_qt_ios_app TARGET)
         endif() # QT_IOS_VERBOSE
     endif() # NOT QT_IOS_CATALOG_APPICON
 
-    if(NOT QT_IOS_CATALOG_LAUNCHIMAGE)
-        set(QT_IOS_CATALOG_LAUNCHIMAGE "LaunchImage")
-        if(QT_IOS_VERBOSE)
-            message(STATUS "CATALOG_LAUNCHIMAGE not specified, default to ${QT_IOS_CATALOG_LAUNCHIMAGE}.")
-        endif() # QT_IOS_VERBOSE
-    endif() # NOT QT_IOS_CATALOG_LAUNCHIMAGE
+    # if(NOT QT_IOS_CATALOG_LAUNCHIMAGE)
+    #     set(QT_IOS_CATALOG_LAUNCHIMAGE "LaunchImage")
+    #     if(QT_IOS_VERBOSE)
+    #         message(STATUS "CATALOG_LAUNCHIMAGE not specified, default to ${QT_IOS_CATALOG_LAUNCHIMAGE}.")
+    #     endif() # QT_IOS_VERBOSE
+    # endif() # NOT QT_IOS_CATALOG_LAUNCHIMAGE
 
     # Print macro configuration
     if(QT_IOS_VERBOSE)
@@ -360,10 +360,14 @@ macro(add_qt_ios_app TARGET)
     endif()
 
     # Set AppIcon Catalog
-    qt_ios_set_xcode_property (${QT_IOS_TARGET} ASSETCATALOG_COMPILER_APPICON_NAME ${QT_IOS_CATALOG_APPICON} "All")
-    # Set LaunchImage Catalog
-    qt_ios_set_xcode_property (${QT_IOS_TARGET} ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME ${QT_IOS_CATALOG_LAUNCHIMAGE} "All")
+    if(QT_IOS_CATALOG_APPICON)
+        qt_ios_set_xcode_property (${QT_IOS_TARGET} ASSETCATALOG_COMPILER_APPICON_NAME ${QT_IOS_CATALOG_APPICON} "All")
+    endif()
 
+    # Set LaunchImage Catalog
+    if(QT_IOS_CATALOG_LAUNCHIMAGE)
+        qt_ios_set_xcode_property (${QT_IOS_TARGET} ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME ${QT_IOS_CATALOG_LAUNCHIMAGE} "All")
+    endif()
     # Make sure a publish dialog is set in XCode.
     # If INSTALL_PATH is empty it won't be possible to deploy to App Store
     qt_ios_set_xcode_property(${QT_IOS_TARGET} INSTALL_PATH "/Applications" "All")
