@@ -61,6 +61,9 @@ include(CMakeParseArguments)
 #    SUPPORT_IPAD
 #    REQUIRES_FULL_SCREEN
 #    HIDDEN_STATUS_BAR
+#    IPA
+#    UPLOAD_SYMBOL
+#    DISTRIBUTION_METHOD "app-store"
 #    VERBOSE
 # )
 macro(add_qt_ios_app TARGET)
@@ -74,6 +77,8 @@ macro(add_qt_ios_app TARGET)
         SUPPORT_IPAD
         REQUIRES_FULL_SCREEN
         HIDDEN_STATUS_BAR
+        IPA
+        UPLOAD_SYMBOL
         )
     set(QT_IOS_ONE_VALUE_ARG NAME
         BUNDLE_IDENTIFIER
@@ -91,6 +96,7 @@ macro(add_qt_ios_app TARGET)
         MAIN_STORYBOARD
         CATALOG_APPICON
         CATALOG_LAUNCHIMAGE
+        DISTRIBUTION_METHOD
         )
     set(QT_IOS_MULTI_VALUE_ARG )
      # parse the macro arguments
@@ -129,6 +135,15 @@ macro(add_qt_ios_app TARGET)
     set(QT_IOS_SUPPORT_IPAD ${ARGIOS_SUPPORT_IPAD})
     set(QT_IOS_REQUIRES_FULL_SCREEN ${ARGIOS_REQUIRES_FULL_SCREEN})
     set(QT_IOS_HIDDEN_STATUS_BAR ${ARGIOS_HIDDEN_STATUS_BAR})
+
+    set(QT_IOS_IPA ${ARGIOS_IPA})
+    set(QT_IOS_UPLOAD_SYMBOL ${ARGIOS_UPLOAD_SYMBOL})
+    if(NOT QT_IOS_DISTRIBUTION_METHOD)
+        set(QT_IOS_DISTRIBUTION_METHOD ${ARGIOS_DISTRIBUTION_METHOD})
+    endif()
+    if("${QT_IOS_DISTRIBUTION_METHOD}" STREQUAL "")
+        set(QT_IOS_DISTRIBUTION_METHOD "app-store")
+    endif()
 
     set(QT_IOS_VERBOSE ${ARGIOS_VERBOSE})
 
@@ -234,6 +249,9 @@ macro(add_qt_ios_app TARGET)
         message(STATUS "SUPPORT_IPAD                        : ${QT_IOS_SUPPORT_IPAD}")
         message(STATUS "REQUIRES_FULL_SCREEN                : ${QT_IOS_REQUIRES_FULL_SCREEN}")
         message(STATUS "HIDDEN_STATUS_BAR                   : ${QT_IOS_HIDDEN_STATUS_BAR}")
+        message(STATUS "IPA                                 : ${QT_IOS_IPA}")
+        message(STATUS "UPLOAD_SYMBOL                       : ${QT_IOS_UPLOAD_SYMBOL}")
+        message(STATUS "DISTRIBUTION_METHOD                 : ${QT_IOS_DISTRIBUTION_METHOD}")
         message(STATUS "------ QtIosCMake END Configuration ------")
     endif() # QT_IOS_VERBOSE
 
@@ -484,5 +502,65 @@ macro(add_qt_ios_app TARGET)
         endif() # QT_IOS_VERBOSE
         set(MACOSX_BUNDLE_MAIN_STORYBOARD ${CMAKE_MATCH_1})
     endif(QT_IOS_MAIN_STORYBOARD)
+
+    if(QT_IOS_IPA)
+
+        set(QT_IOS_TARGET_ARCHIVE ${QT_IOS_TARGET}Archive)
+        set(QT_IOS_TARGET_IPA ${QT_IOS_TARGET}Ipa)
+
+        set(QT_IOS_TARGET_ARCHIVE_PATH ${CMAKE_CURRENT_BINARY_DIR}/${QT_IOS_TARGET}.xcarchive)
+        set(QT_IOS_TARGET_IPA_PATH ${CMAKE_CURRENT_BINARY_DIR}/${QT_IOS_TARGET}.ipa)
+
+        # Generate archive
+        add_custom_target(${QT_IOS_TARGET_ARCHIVE}
+          ALL
+          DEPENDS ${QT_IOS_TARGET}
+          COMMAND xcodebuild
+            -project ${PROJECT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.xcodeproj
+            -scheme ${QT_IOS_TARGET}
+            -archivePath ${QT_IOS_TARGET_ARCHIVE_PATH}
+            archive
+        )
+
+        # Generate IPA
+        if(QT_IOS_PROVISIONING_PROFILE_SPECIFIER)
+            set(QT_IOS_EXPORT_SIGNING_TYPE "manual")
+        else()
+            set(QT_IOS_EXPORT_SIGNING_TYPE "automatic")
+        endif()
+
+        set(QT_IOS_PROVISIONING_PROFILES_KEY
+            "<key>provisioningProfiles</key>\n    <dict>\n        <key>${QT_IOS_BUNDLE_IDENTIFIER}</key>\n        <string>${QT_IOS_PROVISIONING_PROFILE_SPECIFIER}</string>\n     </dict>\n"
+        )
+
+        if(ENABLE_BITCODE)
+            set(QT_IOS_ENABLE_BITCODE TRUE)
+        endif()
+
+        if(QT_IOS_ENABLE_BITCODE)
+            set(QT_IOS_ENABLE_BITCODE_KEY "<key>compileBitcode</key><true/>")
+        else()
+            set(QT_IOS_ENABLE_BITCODE_KEY "")
+        endif()
+
+        if(QT_IOS_UPLOAD_SYMBOL)
+            set(QT_IOS_UPLOAD_SYMBOL_KEY "<key>uploadSymbols</key><true/>")
+        else()
+            set(QT_IOS_UPLOAD_SYMBOL_KEY "")
+        endif()
+
+        set(QT_IOS_EXPORT_OPTIONS_FILE ${CMAKE_CURRENT_BINARY_DIR}/${QT_IOS_TARGET}ExportOptions.plist)
+        configure_file(${QT_IOS_SOURCE_DIR}/ExportOptions.plist.in ${QT_IOS_EXPORT_OPTIONS_FILE})
+
+        add_custom_target(${QT_IOS_TARGET_IPA}
+          ALL
+          DEPENDS ${QT_IOS_TARGET_ARCHIVE}
+          COMMAND xcodebuild -exportArchive
+          -archivePath ${QT_IOS_TARGET_ARCHIVE_PATH}
+          -exportOptionsPlist ${QT_IOS_EXPORT_OPTIONS_FILE}
+          -exportPath ${QT_IOS_TARGET_IPA_PATH}
+        )
+
+    endif()
 
 endmacro()
