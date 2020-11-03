@@ -67,7 +67,7 @@ include(CMakeParseArguments)
 #    DISTRIBUTION_METHOD "app-store"
 #    VERBOSE
 # )
-macro(add_qt_ios_app TARGET)
+function(add_qt_ios_app TARGET)
 
     set(QT_IOS_OPTIONS VERBOSE
         ORIENTATION_PORTRAIT
@@ -401,57 +401,57 @@ macro(add_qt_ios_app TARGET)
     qt_ios_set_xcode_property(${QT_IOS_TARGET} INSTALL_PATH "/Applications" "All")
 
     # Set CMake variables for plist
-    set(MACOSX_BUNDLE_EXECUTABLE_NAME ${QT_IOS_NAME})
-    set(MACOSX_BUNDLE_INFO_STRING ${QT_IOS_NAME})
-    set(MACOSX_BUNDLE_GUI_IDENTIFIER ${QT_IOS_BUNDLE_IDENTIFIER})
-    set(MACOSX_BUNDLE_BUNDLE_NAME ${QT_IOS_NAME})
-    #set(MACOSX_BUNDLE_ICON_FILE "${PROJECT_SOURCE_DIR}/platform/ios/Assets.xcassets/AppIcon.appiconset")
-    set(MACOSX_BUNDLE_BUNDLE_VERSION ${QT_IOS_VERSION})
-    set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${QT_IOS_SHORT_VERSION})
-    set(MACOSX_BUNDLE_LONG_VERSION_STRING ${QT_IOS_LONG_VERSION})
-    set(MACOSX_BUNDLE_COPYRIGHT ${QT_IOS_COPYRIGHT})
+    set(MACOSX_BUNDLE_EXECUTABLE_NAME ${QT_IOS_NAME} PARENT_SCOPE)
+    set(MACOSX_BUNDLE_INFO_STRING ${QT_IOS_NAME} PARENT_SCOPE)
+    set(MACOSX_BUNDLE_GUI_IDENTIFIER ${QT_IOS_BUNDLE_IDENTIFIER} PARENT_SCOPE)
+    set(MACOSX_BUNDLE_BUNDLE_NAME ${QT_IOS_NAME} PARENT_SCOPE)
+    #set(MACOSX_BUNDLE_ICON_FILE "${PROJECT_SOURCE_DIR} PARENT_SCOPE/platform/ios/Assets.xcassets/AppIcon.appiconset")
+    set(MACOSX_BUNDLE_BUNDLE_VERSION ${QT_IOS_VERSION} PARENT_SCOPE)
+    set(MACOSX_BUNDLE_SHORT_VERSION_STRING ${QT_IOS_SHORT_VERSION} PARENT_SCOPE)
+    set(MACOSX_BUNDLE_LONG_VERSION_STRING ${QT_IOS_LONG_VERSION} PARENT_SCOPE)
+    set(MACOSX_BUNDLE_COPYRIGHT ${QT_IOS_COPYRIGHT} PARENT_SCOPE)
 
     # Set require full screen
     if(QT_IOS_REQUIRES_FULL_SCREEN)
-        set(MACOSX_BUNDLE_REQUIRES_FULL_SCREEN "YES")
+        set(MACOSX_BUNDLE_REQUIRES_FULL_SCREEN "YES" PARENT_SCOPE)
         if(QT_IOS_VERBOSE)
             message(STATUS "Add UIRequiresFullScreen flag to Info.pList")
         endif() # QT_IOS_VERBOSE
     else() # QT_IOS_REQUIRES_FULL_SCREEN
-        set(MACOSX_BUNDLE_REQUIRES_FULL_SCREEN "NO")
+        set(MACOSX_BUNDLE_REQUIRES_FULL_SCREEN "NO" PARENT_SCOPE)
     endif() # QT_IOS_REQUIRES_FULL_SCREEN
 
     # Set hidden status bar
     if(QT_IOS_HIDDEN_STATUS_BAR)
-        set(MACOSX_BUNDLE_HIDDEN_STATUS_BAR "true")
+        set(MACOSX_BUNDLE_HIDDEN_STATUS_BAR "true" PARENT_SCOPE)
         if(QT_IOS_VERBOSE)
             message(STATUS "Add UIStatusBarHidden flag to Info.pList")
         endif() # QT_IOS_VERBOSE
     else() # QT_IOS_HIDDEN_STATUS_BAR
-        set(MACOSX_BUNDLE_HIDDEN_STATUS_BAR "false")
+        set(MACOSX_BUNDLE_HIDDEN_STATUS_BAR "false" PARENT_SCOPE)
     endif() # QT_IOS_HIDDEN_STATUS_BAR
 
     # Add orientation flags
     if(QT_IOS_ORIENTATION_PORTRAIT)
-        set(MACOSX_BUNDLE_PORTRAIT "UIInterfaceOrientationPortrait")
+        set(MACOSX_BUNDLE_PORTRAIT "UIInterfaceOrientationPortrait" PARENT_SCOPE)
         if(QT_IOS_VERBOSE)
             message(STATUS "Add UIInterfaceOrientationPortrait flag to Info.pList")
         endif() # QT_IOS_VERBOSE
     endif()
     if(QT_IOS_ORIENTATION_PORTRAIT_UPDOWN)
-        set(MACOSX_BUNDLE_PORTRAITUPDOWN "UIInterfaceOrientationPortraitUpsideDown")
+        set(MACOSX_BUNDLE_PORTRAITUPDOWN "UIInterfaceOrientationPortraitUpsideDown" PARENT_SCOPE)
         if(QT_IOS_VERBOSE)
             message(STATUS "Add UIInterfaceOrientationPortraitUpsideDown flag to Info.pList")
         endif() # QT_IOS_VERBOSE
     endif()
     if(QT_IOS_ORIENTATION_LANDSCAPE_LEFT)
-        set(MACOSX_BUNDLE_LANDSCAPELEFT "UIInterfaceOrientationLandscapeLeft")
+        set(MACOSX_BUNDLE_LANDSCAPELEFT "UIInterfaceOrientationLandscapeLeft" PARENT_SCOPE)
         if(QT_IOS_VERBOSE)
             message(STATUS "Add UIInterfaceOrientationLandscapeLeft flag to Info.pList")
         endif() # QT_IOS_VERBOSE
     endif()
     if(QT_IOS_ORIENTATION_LANDSCAPE_RIGHT)
-        set(MACOSX_BUNDLE_LANDSCAPERIGHT "UIInterfaceOrientationLandscapeRight")
+        set(MACOSX_BUNDLE_LANDSCAPERIGHT "UIInterfaceOrientationLandscapeRight" PARENT_SCOPE)
         if(QT_IOS_VERBOSE)
             message(STATUS "Add UIInterfaceOrientationLandscapeRight flag to Info.pList")
         endif() # QT_IOS_VERBOSE
@@ -460,7 +460,7 @@ macro(add_qt_ios_app TARGET)
        NOT QT_IOS_ORIENTATION_PORTRAIT_UPDOWN AND
        NOT QT_IOS_ORIENTATION_LANDSCAPE_LEFT AND
        NOT QT_IOS_ORIENTATION_LANDSCAPE_RIGHT)
-        set(MACOSX_BUNDLE_PORTRAIT "UIInterfaceOrientationPortrait")
+        set(MACOSX_BUNDLE_PORTRAIT "UIInterfaceOrientationPortrait" PARENT_SCOPE)
         if(QT_IOS_VERBOSE)
             message(STATUS "Add UIInterfaceOrientationPortrait as default to Info.pList becayse nothing was set by user in the list"
             "{ORIENTATION_PORTRAIT, ORIENTATION_PORTRAIT_UPDOWN, ORIENTATION_LANDSCAPE_LEFT, ORIENTATION_LANDSCAPE_RIGHT}")
@@ -488,7 +488,7 @@ macro(add_qt_ios_app TARGET)
         if(QT_IOS_VERBOSE)
             message(STATUS "Add UILaunchStoryboardName key with value ${STORYBOARD_FILE_NAME} in Info.pList")
         endif() # QT_IOS_VERBOSE
-        set(MACOSX_BUNDLE_LAUNCHSCREEN_STORYBOARD ${STORYBOARD_FILE_NAME})
+        set(MACOSX_BUNDLE_LAUNCHSCREEN_STORYBOARD ${STORYBOARD_FILE_NAME} PARENT_SCOPE)
     else() # QT_IOS_LAUNCHSCREEN_STORYBOARD
         if(QT_IOS_VERBOSE)
             if(NOT QT_IOS_REQUIRES_FULL_SCREEN)
@@ -506,7 +506,7 @@ macro(add_qt_ios_app TARGET)
         if(QT_IOS_VERBOSE)
             message(STATUS "Add UIMainStoryboardFile key with value ${CMAKE_MATCH_1} in Info.pList")
         endif() # QT_IOS_VERBOSE
-        set(MACOSX_BUNDLE_MAIN_STORYBOARD ${CMAKE_MATCH_1})
+        set(MACOSX_BUNDLE_MAIN_STORYBOARD ${CMAKE_MATCH_1} PARENT_SCOPE)
     endif(QT_IOS_MAIN_STORYBOARD)
 
     if(QT_IOS_IPA)
@@ -569,4 +569,4 @@ macro(add_qt_ios_app TARGET)
 
     endif()
 
-endmacro()
+endfunction()
