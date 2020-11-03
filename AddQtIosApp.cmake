@@ -46,6 +46,7 @@ include(CMakeParseArguments)
 #    CUSTOM_PLIST "path/to/MacOSXBundleInfo.plist.in"
 #    CODE_SIGN_IDENTITY "iPhone Developer"
 #    TEAM_ID "AAAAAAAA"
+#    PROVISIONING_PROFILE_SPECIFIER "profile-name"
 #    COPYRIGHT "My Cool Copyright"
 #    QML_DIR "${QT_IOS_QT_ROOT}/qml"
 #    ASSET_DIR "path/to/Assets.xcassets"
@@ -237,6 +238,7 @@ macro(add_qt_ios_app TARGET)
         message(STATUS "CUSTOM_PLIST                        : ${QT_IOS_CUSTOM_PLIST}")
         message(STATUS "CODE_SIGN_IDENTITY                  : ${QT_IOS_CODE_SIGN_IDENTITY}")
         message(STATUS "TEAM_ID                             : ${QT_IOS_TEAM_ID}")
+        message(STATUS "PROVISIONING_PROFILE_SPECIFIER      : ${QT_IOS_PROVISIONING_PROFILE_SPECIFIER}")
         message(STATUS "COPYRIGHT                           : ${QT_IOS_COPYRIGHT}")
         message(STATUS "QML_DIR                             : ${QT_IOS_QML_DIR}")
         message(STATUS "ASSET_DIR                           : ${QT_IOS_ASSET_DIR}")
