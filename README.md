@@ -18,7 +18,7 @@ This utility has been developed for my own needs. Don't hesitate to use / share 
 
 ### Showcase
 
-The Application [QQuickMaterialHelperGallery](https://github.com/OlivierLDff/QQuickMaterialHelperGallery) showcase the use of this library. *See QtIosCMake call in `platform/PostBuildPlatform.cmake` and iOs ressources in `platform/ios/`. See QtStaticCMake call in `CMakeLists.txt`*
+The Application [QaterialGallery](https://github.com/OlivierLDff/QaterialGallery) showcase the use of this library. *See QtIosCMake call in `platforms/Deploy.cmake` and iOs ressources in `platforms/ios/`. See QtStaticCMake call in `platforms/Deploy.cmake`*
 
 ## How to use it
 
