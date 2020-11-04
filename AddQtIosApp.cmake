@@ -515,7 +515,7 @@ function(add_qt_ios_app TARGET)
         set(QT_IOS_TARGET_IPA ${QT_IOS_TARGET}Ipa)
 
         set(QT_IOS_TARGET_ARCHIVE_PATH ${CMAKE_CURRENT_BINARY_DIR}/${QT_IOS_TARGET}.xcarchive)
-        set(QT_IOS_TARGET_IPA_PATH ${CMAKE_CURRENT_BINARY_DIR}/${QT_IOS_TARGET}.ipa)
+        set(QT_IOS_TARGET_IPA_PATH ${CMAKE_CURRENT_BINARY_DIR}/${QT_IOS_TARGET_IPA})
 
         # Generate archive
         add_custom_target(${QT_IOS_TARGET_ARCHIVE}

@@ -408,7 +408,7 @@ Set `UIStatusBarHidden`to true.
 
 If specified, two additional target are going to be generated.
 - `<MyApp>Archive` that generate `MyApp.xcarchive`.
-- `<MyApp>Ipa` that generate `MyApp.ipa`.
+- `<MyApp>Ipa` that generate `MyAppIpa/MyApp.ipa`.
 
 Ipa file is the format required by App Store Connect. It can be uploaded straight to TestFlight.
 
