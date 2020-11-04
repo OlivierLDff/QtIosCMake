@@ -49,7 +49,7 @@
 
     <!-- Short Version -->
     <key>CFBundleShortVersionString</key>
-    <string>${MACOSX_BUNDLE_SHORT_VERSION_STRING}</string>    
+    <string>${MACOSX_BUNDLE_SHORT_VERSION_STRING}</string>
 
     <key>CFBundleSignature</key>
     <string>????</string>
@@ -69,6 +69,7 @@
     <key>UISupportedInterfaceOrientations</key>
     <array>
         <string>${MACOSX_BUNDLE_PORTRAIT}</string>
+        <string>${MACOSX_BUNDLE_PORTRAITUPDOWN}</string>
         <string>${MACOSX_BUNDLE_LANDSCAPELEFT}</string>
         <string>${MACOSX_BUNDLE_LANDSCAPERIGHT}</string>
     </array>
