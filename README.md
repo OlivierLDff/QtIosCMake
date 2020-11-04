@@ -96,6 +96,9 @@ target_link_libraries(MyApp PUBLIC "-framework Foundation -framework AVFoundatio
     -framework CoreMotion -framework StoreKit -weak_framework Metal -lz")
 ```
 
+* [Xcode 12 can introduce a linking error when building for simulator.](https://stackoverflow.com/a/64139830). Manually set Build Only Active Architecture to YES in Xcode.
+* Xcode 12 provide a "new build system". You need CMake version > 3.19 to use it by default.
+
 ## Options of the ```add_qt_ios_app``` macro
 
 The first argument is the executable target that will become an app.
