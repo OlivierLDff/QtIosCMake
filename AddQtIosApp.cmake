@@ -171,7 +171,7 @@ function(add_qt_ios_app TARGET)
     # Warning if no version
     if(NOT ARGIOS_VERSION)
         set(QT_IOS_VERSION ${CMAKE_PROJECT_VERSION})
-        if(QT_IOS_VERSION STREQUAL "")
+        if("${QT_IOS_VERSION}" STREQUAL "")
             set(QT_IOS_VERSION "1.0.0")
         endif()
         if(QT_IOS_VERBOSE)
@@ -183,17 +183,17 @@ function(add_qt_ios_app TARGET)
     # Default value for SHORT_VERSION
     if(NOT QT_IOS_SHORT_VERSION)
         if(QT_IOS_VERBOSE)
-            message(STATUS "SHORT_VERSION not specified, default to VERSION")
+            message(STATUS "SHORT_VERSION not specified, default to ${QT_IOS_VERSION}")
         endif() # QT_IOS_VERBOSE
-        set(QT_IOS_SHORT_VERSION ${ARGIOS_VERSION})
+        set(QT_IOS_SHORT_VERSION ${QT_IOS_VERSION})
     endif() # NOT QT_IOS_SHORT_VERSION
 
     # Default value for long version
     if(NOT QT_IOS_LONG_VERSION)
         if(QT_IOS_VERBOSE)
-            message(STATUS "LONG_VERSION not specified, default to VERSION")
+            message(STATUS "LONG_VERSION not specified, default to ${QT_IOS_VERSION}")
         endif() # QT_IOS_VERBOSE
-        set(QT_IOS_LONG_VERSION ${ARGIOS_VERSION})
+        set(QT_IOS_LONG_VERSION ${QT_IOS_VERSION})
     endif() # NOT QT_IOS_LONG_VERSION
 
     # Default value for plist file
