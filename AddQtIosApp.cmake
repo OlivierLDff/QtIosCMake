@@ -511,6 +511,11 @@ function(add_qt_ios_app TARGET)
         set(MACOSX_BUNDLE_MAIN_STORYBOARD ${CMAKE_MATCH_1} PARENT_SCOPE)
     endif(QT_IOS_MAIN_STORYBOARD)
 
+    if(${PLATFORM_INT} MATCHES ".*SIMULATOR.*" AND QT_IOS_IPA)
+        unset(QT_IOS_IPA)
+        message(WARNING "Ipa can't be enabled for simulator.")
+    endif()
+
     if(QT_IOS_IPA)
 
         set(QT_IOS_TARGET_ARCHIVE ${QT_IOS_TARGET}Archive)
