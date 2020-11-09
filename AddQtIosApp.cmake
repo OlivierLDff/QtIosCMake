@@ -43,7 +43,7 @@ include(CMakeParseArguments)
 #    VERSION "1.2.3"
 #    SHORT_VERSION "1.2.3"
 #    LONG_VERSION "1.2.3.456"
-#    CUSTOM_PLIST "path/to/MacOSXBundleInfo.plist.in"
+#    CUSTOM_PLIST "path/to/Info.plist.in"
 #    CODE_SIGN_IDENTITY "iPhone Developer"
 #    TEAM_ID "AAAAAAAA"
 #    PROVISIONING_PROFILE_SPECIFIER "profile-name"
@@ -198,7 +198,7 @@ function(add_qt_ios_app TARGET)
 
     # Default value for plist file
     if(NOT QT_IOS_CUSTOM_PLIST)
-        set(QT_IOS_CUSTOM_PLIST ${QT_IOS_SOURCE_DIR}/MacOSXBundleInfo.plist.in)
+        set(QT_IOS_CUSTOM_PLIST ${QT_IOS_SOURCE_DIR}/Info.plist.in)
         if(QT_IOS_VERBOSE)
             message(STATUS "CUSTOM_PLIST not specified, default to ${QT_IOS_CUSTOM_PLIST}")
         endif() # QT_IOS_VERBOSE
