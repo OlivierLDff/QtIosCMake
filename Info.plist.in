@@ -80,5 +80,7 @@
         <string>${MACOSX_BUNDLE_LANDSCAPELEFT}</string>
         <string>${MACOSX_BUNDLE_LANDSCAPERIGHT}</string>
     </array>
+
+    <key>ITSAppUsesNonExemptEncryption</key><false/>
 </dict>
 </plist>
