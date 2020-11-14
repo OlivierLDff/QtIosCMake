@@ -219,13 +219,6 @@ function(add_qt_ios_app TARGET)
         endif() # QT_IOS_VERBOSE
     endif() # NOT QT_IOS_CATALOG_APPICON
 
-    # if(NOT QT_IOS_CATALOG_LAUNCHIMAGE)
-    #     set(QT_IOS_CATALOG_LAUNCHIMAGE "LaunchImage")
-    #     if(QT_IOS_VERBOSE)
-    #         message(STATUS "CATALOG_LAUNCHIMAGE not specified, default to ${QT_IOS_CATALOG_LAUNCHIMAGE}.")
-    #     endif() # QT_IOS_VERBOSE
-    # endif() # NOT QT_IOS_CATALOG_LAUNCHIMAGE
-
     # Print macro configuration
     if(QT_IOS_VERBOSE)
         message(STATUS "------ QtIosCMake Configuration ------")
