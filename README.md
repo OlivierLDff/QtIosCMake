@@ -431,6 +431,14 @@ When specifying `IPA`, additionnal parameters are available:
 
 `DISTRIBUTION_METHOD` can be overwritten at configure time by specifying a `-DQT_IOS_DISTRIBUTION_METHOD="ad-hoc"` for example.
 
+**ITS_ENCRYPTION_EXPORT_COMPLIANCE_CODE**
+
+The export compliance code provided by App Store Connect for apps that require it. This will add a key [ITSEncryptionExportComplianceCode](https://developer.apple.com/documentation/bundleresources/information_property_list/itsencryptionexportcompliancecode) in Info.plist.
+
+If not provided (means you don't need it), it will create a key [ITSAppUsesNonExemptEncryption](https://help.apple.com/xcode/mac/current/#/dev0dc15d044) to false.
+
+This is required by Apple Connect. If this key doesn't exist in your Info.plist, you will need to fix this in Apple TestFlight website when uploading the IPA.
+
 **VERBOSE**
 
 Print all debug information. Usefull to check if configuration is ok.

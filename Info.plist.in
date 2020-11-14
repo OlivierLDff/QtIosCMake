@@ -81,6 +81,6 @@
         <string>${MACOSX_BUNDLE_LANDSCAPERIGHT}</string>
     </array>
 
-    <key>ITSAppUsesNonExemptEncryption</key><false/>
+    ${QT_IOS_ITS_ENCRYPTION_KEYS}
 </dict>
 </plist>

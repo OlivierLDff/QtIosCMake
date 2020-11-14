@@ -80,6 +80,7 @@ function(add_qt_ios_app TARGET)
         HIDDEN_STATUS_BAR
         IPA
         UPLOAD_SYMBOL
+        ITS_ENCRYPTION_EXPORT_COMPLIANCE_CODE
         )
     set(QT_IOS_ONE_VALUE_ARG NAME
         BUNDLE_IDENTIFIER
@@ -147,6 +148,17 @@ function(add_qt_ios_app TARGET)
     endif()
     if("${QT_IOS_DISTRIBUTION_METHOD}" STREQUAL "")
         set(QT_IOS_DISTRIBUTION_METHOD "app-store")
+    endif()
+
+    # Allow user to override QT_IOS_ITS_ENCRYPTION_EXPORT_COMPLIANCE_CODE from cache/command line
+    if(NOT QT_IOS_ITS_ENCRYPTION_EXPORT_COMPLIANCE_CODE)
+        set(QT_IOS_ITS_ENCRYPTION_EXPORT_COMPLIANCE_CODE ARGIOS_ITS_ENCRYPTION_EXPORT_COMPLIANCE_CODE)
+    endif()
+    # QT_IOS_ITS_ENCRYPTION_KEYS is used in Info.plist.in
+    if(QT_IOS_ITS_ENCRYPTION_EXPORT_COMPLIANCE_CODE)
+        set(QT_IOS_ITS_ENCRYPTION_KEYS "<key>ITSAppUsesNonExemptEncryption</key><true/>\n    <key>ITSEncryptionExportComplianceCode</key>\n    <string>${QT_IOS_ITS_ENCRYPTION_EXPORT_COMPLIANCE_CODE}</string>" PARENT_SCOPE)
+    else()
+        set(QT_IOS_ITS_ENCRYPTION_KEYS "<key>ITSAppUsesNonExemptEncryption</key><false/>" PARENT_SCOPE)
     endif()
 
     set(QT_IOS_VERBOSE ${ARGIOS_VERBOSE})
