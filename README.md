@@ -5,20 +5,28 @@
 This project provide a CMake macro to help you deploy Qt Application for iOS. This macro replace all kind of stuff QMake is doing under the hood and add lots of options to customize `Info.plist`.
 
 * Correctly link to all qt libraries. *Optimization can be done here.*
-* Link with required framework. *Optimization can be done here.*
+* Link with required framework.
 * Redirect entry point to create UIApplication before regular `main()`.
-* Generate `Info.plist` with inputs
-* Sign the **XCode** Generated project
+* Generate `Info.plist` with inputs based on `Info.plist.in`. (User customizable)
+* Sign the **XCode** Generated project (inside a `.app`).
+* Generate `.ipa` for direct upload to TestFlight.
 
 The main goal is to build the app without any change inside XCode.
 
 This utility has been developed for my own needs. Don't hesitate to use / share / fork / modify / improve it freely :)
 
-*This project is conceptually based on the great [QtAndroidCMake of Laurent Gomila](https://github.com/LaurentGomila/qt-android-cmake).*
+*This project is conceptually based on the great [QtAndroidCMake of Laurent Gomila](https://github.com/OlivierLDff/QtAndroidCMake).*
 
 ### Showcase
 
-The Application [QaterialGallery](https://github.com/OlivierLDff/QaterialGallery) showcase the use of this library. *See QtIosCMake call in `platforms/Deploy.cmake` and iOs ressources in `platforms/ios/`. See QtStaticCMake call in `platforms/Deploy.cmake`*
+The Application [QaterialGallery](https://github.com/OlivierLDff/QaterialGallery) showcase the use of this library. *See QtIosCMake call in `platforms/Deploy.cmake` and iOs resources in `platforms/ios/`. See QtStaticCMake call in `platforms/Deploy.cmake`*.
+
+The application also demonstrate full CI pipeline with Github Actions.
+
+* Install Certificates & Profiles from AppStore Connect.
+* Build `.app`.
+* Build `.ipa`.
+* Upload `.ipa` to AppStore TestFlight.
 
 ## How to use it
 
@@ -27,10 +35,10 @@ The Application [QaterialGallery](https://github.com/OlivierLDff/QaterialGallery
 All you have to do is to call the ```add_qt_ios_app``` macro. No additionnal target will be generated, only the main target property are going to change. Of course this is not enough and you'll need to add extract arguments.
 
 ```cmake
-IF(${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
-    INCLUDE(QtIosCMake/AddQtIosApp.cmake)
+if(${CMAKE_SYSTEM_NAME} STREQUAL "iOS")
+    include(QtIosCMake/AddQtIosApp.cmake)
     add_qt_ios_app(MyApp)
-ENDIF()
+endif()
 ```
 
 ### How to run CMake
@@ -64,7 +72,7 @@ cmake -DCMAKE_PREFIX_PATH=$QT_IOS_DIR \
 path/to/Projet/
 ```
 
-To sign your app you need at least at team id and a signing identity.
+To sign your app you need at least a team id and a signing identity. I recommand you to override those variable when doing the cmake command, and not writting them inside your cmake scripts. This will give you more control when configuring the project.
 
 * `QT_IOS_TEAM_ID`: Same as `TEAM_ID` option, can be useful to specify at configure time, not in source code.
 * `QT_IOS_CODE_SIGN_IDENTITY`: Same as `CODE_SIGN_IDENTITY` option, can be useful to specify at configure time, not in source code.
@@ -96,7 +104,7 @@ target_link_libraries(MyApp PUBLIC "-framework Foundation -framework AVFoundatio
     -framework CoreMotion -framework StoreKit -weak_framework Metal -lz")
 ```
 
-* [Xcode 12 can introduce a linking error when building for simulator.](https://stackoverflow.com/a/64139830). Manually set Build Only Active Architecture to YES in Xcode.
+* [Xcode 12 can introduce a linking error when building for simulator](https://stackoverflow.com/a/64139830). Manually set Build Only Active Architecture to YES in Xcode.
 * Xcode 12 provide a "new build system". You need CMake version > 3.19 to use it by default.
 
 ## Options of the ```add_qt_ios_app``` macro
@@ -220,6 +228,7 @@ It is possible to specify a custom pList file. The default is `MacOSXBundleInfo.
 <key>UISupportedInterfaceOrientations</key>
 <array>
     <string>${MACOSX_BUNDLE_PORTRAIT}</string>
+    <string>${MACOSX_BUNDLE_PORTRAITUPDOWN}</string>
     <string>${MACOSX_BUNDLE_LANDSCAPELEFT}</string>
     <string>${MACOSX_BUNDLE_LANDSCAPERIGHT}</string>
 </array>
@@ -434,7 +443,9 @@ Print all debug information. Usefull to check if configuration is ok.
   * Generate Qt Qml Plugin import source file.
   * Add Correct linker to load platform library `qios`.
 
-*Tested with XCode 10.2.1, Qt5.12.0, iOs 12.2.*
+* *Tested with XCode 10.2.1, Qt5.12.0, iOs 12.2.*
+
+* *Tested with XCode 12, Qt5.15.1, iOs 14.0.*
 
 ## Improvement Idea
 
