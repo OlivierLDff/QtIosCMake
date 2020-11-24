@@ -100,7 +100,9 @@ function(add_qt_ios_app TARGET)
         CATALOG_LAUNCHIMAGE
         DISTRIBUTION_METHOD
         )
-    set(QT_IOS_MULTI_VALUE_ARG )
+    set(QT_IOS_MULTI_VALUE_ARG
+        RESOURCE_FILES
+        )
      # parse the macro arguments
     cmake_parse_arguments(ARGIOS "${QT_IOS_OPTIONS}" "${QT_IOS_ONE_VALUE_ARG}" "${QT_IOS_MULTI_VALUE_ARG}" ${ARGN})
 
@@ -131,6 +133,8 @@ function(add_qt_ios_app TARGET)
     set(QT_IOS_MAIN_STORYBOARD ${ARGIOS_MAIN_STORYBOARD})
     set(QT_IOS_CATALOG_APPICON ${ARGIOS_CATALOG_APPICON})
     set(QT_IOS_CATALOG_LAUNCHIMAGE ${ARGIOS_CATALOG_LAUNCHIMAGE})
+
+    set(QT_IOS_RESOURCE_FILES "${ARGIOS_RESOURCE_FILES}")
 
     set(QT_IOS_ORIENTATION_PORTRAIT ${ARGIOS_ORIENTATION_PORTRAIT})
     set(QT_IOS_ORIENTATION_PORTRAIT_UPDOWN ${ARGIOS_ORIENTATION_PORTRAIT_UPDOWN})
@@ -231,7 +235,7 @@ function(add_qt_ios_app TARGET)
         endif() # QT_IOS_VERBOSE
     endif() # NOT QT_IOS_CATALOG_APPICON
 
-    # Print macro configuration
+    # Print macro configuration
     if(QT_IOS_VERBOSE)
         message(STATUS "------ QtIosCMake Configuration ------")
         message(STATUS "TARGET                              : ${QT_IOS_TARGET}")
@@ -486,6 +490,15 @@ function(add_qt_ios_app TARGET)
             message(STATUS "No Asset dir specified. This is the recommanded way to add Icons and LaunchImage")
         endif() # QT_IOS_VERBOSE
     endif() # QT_IOS_ASSET_DIR
+
+    foreach(_resource IN LISTS QT_IOS_RESOURCE_FILES)
+        if(QT_IOS_VERBOSE)
+            message(STATUS "Add resource: ${_resource}")
+        endif()
+        target_sources(${QT_IOS_TARGET} PRIVATE ${_resource})
+        set_source_files_properties(${_resource} PROPERTIES MACOSX_PACKAGE_LOCATION Resources)
+    endforeach()
+
 
     # Add Launchscreen storyboard as ressource
     if(QT_IOS_LAUNCHSCREEN_STORYBOARD)
