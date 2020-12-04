@@ -65,6 +65,9 @@
     <key>NSHumanReadableCopyright</key>
     <string>${MACOSX_BUNDLE_COPYRIGHT}</string>
 
+    <!-- A message that tells the user why the app is requesting add-only access to the user’s photo library -->
+    ${MACOSX_BUNDLE_PHOTO_LIBRARY_USAGE_DESCRIPTION}
+
     <!-- Ui Orientation -->
     <key>UISupportedInterfaceOrientations</key>
     <array>

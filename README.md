@@ -135,6 +135,7 @@ add_qt_ios_app(MyApp
     ORIENTATION_PORTRAIT_UPSIDEDOWN
     ORIENTATION_LANDSCAPELEFT
     ORIENTATION_LANDSCAPERIGHT
+    PHOTO_LIBRARY_USAGE_DESCRIPTION "My App needs to access your photo library."
     SUPPORT_IPHONE
     SUPPORT_IPAD
     REQUIRES_FULL_SCREEN
@@ -387,6 +388,18 @@ The default allowed orientation can be set with flags:
 * `ORIENTATION_LANDSCAPERIGHT`: Set *UIInterfaceOrientationLandscapeRight* flag.
 
 ![ScOrientation](doc/ScOrientation.png)
+
+**PHOTO LIBRARY USAGE DESCRIPTION**
+
+A message that tells the user why the app is requesting access to the user’s photo library.
+
+*Example:*
+
+```cmake
+add_qt_ios_app(MyApp
+    PHOTO_LIBRARY_USAGE_DESCRIPTION "My App needs to access your photo library."
+)
+```
 
 **SUPPORTED DEVICES**
 
