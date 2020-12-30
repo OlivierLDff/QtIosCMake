@@ -68,7 +68,7 @@ cmake -DCMAKE_PREFIX_PATH=$QT_IOS_DIR \
 -DCMAKE_TOOLCHAIN_FILE=/path/to/ios.toolchain.cmake \
 -DPLATFORM=OS64COMBINED \
 -DENABLE_BITCODE=FALSE \
--G "XCode" \
+-G "Xcode" \
 path/to/Projet/
 ```
 
