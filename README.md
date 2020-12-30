@@ -56,7 +56,7 @@ If you installed official Qt binary, Qt Sdk binary is located in:
 
 ```bash
 export QT_USER_ID=$(id -un)
-export QT_IOS_VERSION=5.15.1
+export QT_IOS_VERSION=5.15.2
 export QT_IOS_DIR=/Users/$QT_USER_ID/Qt/$QT_IOS_VERSION/ios
 ```
 
