@@ -133,8 +133,8 @@ add_qt_ios_app(MyApp
     CATALOG_LAUNCHIMAGE "LaunchImage"
     ORIENTATION_PORTRAIT
     ORIENTATION_PORTRAIT_UPSIDEDOWN
-    ORIENTATION_LANDSCAPELEFT
-    ORIENTATION_LANDSCAPERIGHT
+    ORIENTATION_LANDSCAPE_LEFT
+    ORIENTATION_LANDSCAPE_RIGHT
     PHOTO_LIBRARY_USAGE_DESCRIPTION "My App needs to access your photo library."
     SUPPORT_IPHONE
     SUPPORT_IPAD
@@ -384,8 +384,8 @@ The default allowed orientation can be set with flags:
 
 * `ORIENTATION_PORTRAIT`: Set *UIInterfaceOrientationPortrait* flag.
 * `ORIENTATION_PORTRAIT_UPSIDEDOWN`: Set *UIInterfaceOrientationPortraitUpSideDown* flag.
-* `ORIENTATION_LANDSCAPELEFT`: Set *UIInterfaceOrientationLandscapeLeft* flag.
-* `ORIENTATION_LANDSCAPERIGHT`: Set *UIInterfaceOrientationLandscapeRight* flag.
+* `ORIENTATION_LANDSCAPE_LEFT`: Set *UIInterfaceOrientationLandscapeLeft* flag.
+* `ORIENTATION_LANDSCAPE_RIGHT`: Set *UIInterfaceOrientationLandscapeRight* flag.
 
 ![ScOrientation](doc/ScOrientation.png)
 
