@@ -133,7 +133,7 @@ add_qt_ios_app(MyApp
     CATALOG_APPICON "AppIcon"
     CATALOG_LAUNCHIMAGE "LaunchImage"
     ORIENTATION_PORTRAIT
-    ORIENTATION_PORTRAIT_UPSIDEDOWN
+    ORIENTATION_PORTRAIT_UPDOWN
     ORIENTATION_LANDSCAPE_LEFT
     ORIENTATION_LANDSCAPE_RIGHT
     PHOTO_LIBRARY_USAGE_DESCRIPTION "My App needs to access your photo library."
@@ -384,7 +384,7 @@ Set the Main Storyboard of your app. The file will also be bundled.
 The default allowed orientation can be set with flags:
 
 * `ORIENTATION_PORTRAIT`: Set *UIInterfaceOrientationPortrait* flag.
-* `ORIENTATION_PORTRAIT_UPSIDEDOWN`: Set *UIInterfaceOrientationPortraitUpSideDown* flag.
+* `ORIENTATION_PORTRAIT_UPDOWN`: Set *UIInterfaceOrientationPortraitUpSideDown* flag.
 * `ORIENTATION_LANDSCAPE_LEFT`: Set *UIInterfaceOrientationLandscapeLeft* flag.
 * `ORIENTATION_LANDSCAPE_RIGHT`: Set *UIInterfaceOrientationLandscapeRight* flag.
 
