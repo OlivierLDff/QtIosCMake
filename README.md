@@ -77,6 +77,7 @@ To sign your app you need at least a team id and a signing identity. I recommand
 * `QT_IOS_TEAM_ID`: Same as `TEAM_ID` option, can be useful to specify at configure time, not in source code.
 * `QT_IOS_CODE_SIGN_IDENTITY`: Same as `CODE_SIGN_IDENTITY` option, can be useful to specify at configure time, not in source code.
 * `QT_IOS_PROVISIONING_PROFILE_SPECIFIER`: Same as `PROVISIONING_PROFILE_SPECIFIER` option, can be useful to specify at configure time, not in source code.
+* `QT_IOS_EXPORT_ARCHIVE_XCODEBUILD_FLAGS`: Allows to specify additional flags that are passed to `xcodebuild` when creating the IPA file.
 
 Then you can simply build your app:
 
@@ -132,7 +133,7 @@ add_qt_ios_app(MyApp
     CATALOG_APPICON "AppIcon"
     CATALOG_LAUNCHIMAGE "LaunchImage"
     ORIENTATION_PORTRAIT
-    ORIENTATION_PORTRAIT_UPSIDEDOWN
+    ORIENTATION_PORTRAIT_UPDOWN
     ORIENTATION_LANDSCAPE_LEFT
     ORIENTATION_LANDSCAPE_RIGHT
     PHOTO_LIBRARY_USAGE_DESCRIPTION "My App needs to access your photo library."
@@ -383,7 +384,7 @@ Set the Main Storyboard of your app. The file will also be bundled.
 The default allowed orientation can be set with flags:
 
 * `ORIENTATION_PORTRAIT`: Set *UIInterfaceOrientationPortrait* flag.
-* `ORIENTATION_PORTRAIT_UPSIDEDOWN`: Set *UIInterfaceOrientationPortraitUpSideDown* flag.
+* `ORIENTATION_PORTRAIT_UPDOWN`: Set *UIInterfaceOrientationPortraitUpSideDown* flag.
 * `ORIENTATION_LANDSCAPE_LEFT`: Set *UIInterfaceOrientationLandscapeLeft* flag.
 * `ORIENTATION_LANDSCAPE_RIGHT`: Set *UIInterfaceOrientationLandscapeRight* flag.
 

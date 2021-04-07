@@ -600,6 +600,7 @@ function(add_qt_ios_app TARGET)
           -archivePath ${QT_IOS_TARGET_ARCHIVE_PATH}
           -exportOptionsPlist ${QT_IOS_EXPORT_OPTIONS_FILE}
           -exportPath ${QT_IOS_TARGET_IPA_PATH}
+          ${QT_IOS_EXPORT_ARCHIVE_XCODEBUILD_FLAGS}
         )
 
     endif()
