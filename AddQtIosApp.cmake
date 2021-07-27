@@ -274,6 +274,7 @@ function(add_qt_ios_app TARGET)
         message(STATUS "IPA                                 : ${QT_IOS_IPA}")
         message(STATUS "UPLOAD_SYMBOL                       : ${QT_IOS_UPLOAD_SYMBOL}")
         message(STATUS "DISTRIBUTION_METHOD                 : ${QT_IOS_DISTRIBUTION_METHOD}")
+        message(STATUS "RESOURCE_FILES                      : ${QT_IOS_RESOURCE_FILES}")
         message(STATUS "------ QtIosCMake END Configuration ------")
     endif() # QT_IOS_VERBOSE
 
