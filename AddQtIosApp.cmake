@@ -557,6 +557,7 @@ function(add_qt_ios_app TARGET)
             -project ${PROJECT_BINARY_DIR}/${CMAKE_PROJECT_NAME}.xcodeproj
             -scheme ${QT_IOS_TARGET}
             -archivePath ${QT_IOS_TARGET_ARCHIVE_PATH}
+            ${QT_IOS_ARCHIVE_XCODEBUILD_FLAGS}
             archive
         )
 
